@@ -96,3 +96,18 @@ sudo cp ./ninja /usr/bin
 ninja --version
 ```
 
+
+
+## SSH免登录
+
+在Windows上打开powershell，输入
+
+```shell
+ssh-keygen -t ed25519 -C vi2@gitee.com
+```
+
+然后一路回车
+
+打开 C:\Users\Administrator\.ssh 目录
+
+复制 id_ed25519.pub 的内容到~/.ssh/authorized_keys
