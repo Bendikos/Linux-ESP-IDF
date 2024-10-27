@@ -1,119 +1,59 @@
-## 安装esp-idf
-
-### 1、安装各种必要的工具
+# 安装各种必要的工具
 
 ```shell
-sudo apt-get install git wget flex bison gperf python3-pip python3-venv cmake ninja-build ccache libffi-dev libssl-dev dfu-util libusb-1.0-0 net-tools
+sudo apt-get install git wget flex bison gperf python3\
+ python3-pip python3-venv cmake ninja-build ccache\
+ libffi-dev libssl-dev dfu-util libusb-1.0-0
 ```
 
-### 2、新建esp32目录
+# 从Gitee克隆esp-idf仓库
 
 ```shell
-mkdir esp32
-cd esp32
-```
-
-### 3、拉取gitee工具
-
-```shell
-git clone https://gitee.com/EspressifSystems/esp-gitee-tools.git
-```
-
-### 4、执行gitee工具切换镜像脚本
-
-```shell
-cd esp-gitee-tools
-./jihu-mirror.sh set
-```
-
-### 5、拉取esp-idf源码
-
-```shell
-cd ..
+mkdir -p ~/esp
+cd ~/esp
 git clone --recursive https://github.com/espressif/esp-idf.git
 ```
 
-### 6、切换esp-idf版本分支到v5.2
+# 为了克隆子仓库和安装工具链
+
+需要用到esp-gitee-tools工具，下载该工具到本地。
 
 ```shell
-cd esp-idf
-git checkout v5.2
+cd ~/esp/esp-idf
+git clone https://gitee.com/EspressifSystems/esp-gitee-tools.git
 ```
 
-
-### 验证esp-idf分支是否切换
+# 克隆子模块
 
 ```shell
-git branch
+cd ~/esp/esp-idf
+./esp-gitee-tools/submodule-update.sh
 ```
 
-### 初始化esp-idfv5.2
+# 安装工具链
+
+需要下载的工具包比较多，大约需要10分钟左右
 
 ```shell
-git submodule update --init --recursive
-如果提示失败或有错误试下这句：../esp-gitee-tools/submodule-update.sh
+cd ~/esp/esp-idf
+./esp-gitee-tools/install.sh
 ```
 
-### 7、更换pip源
+# 激活esp-idf
+
+在 ~/.bashrc 文件中增加 一行命令：`alias get_idf='. ~/esp/esp-idf/export.sh'`
+
+执行命令：`source ~/.bashrc` 激活该文件。 在任何Terminal窗口均可以执行命令：`get_idf`，激活esp-idf环境。
+
+# 验证esp-idf
 
 ```shell
-pip config set global.index-url http://mirrors.aliyun.com/pypi/simple
-pip config set global.trusted-host mirrors.aliyun.com
+cd ~/esp
+mkdir app-example
+cp -r  esp-idf/examples/* app-example/
+cd app-example/get-started/blink/
+
 ```
-
-### 8、安装编译工具
-
-```shell
-../esp-gitee-tools/install.sh
-```
-
-### 9、设置环境变量
-
-```shell
-source export.sh
-```
-
-```shell
-vim /home/zuozhongkai/.profile
-```
-
-输入以下代码
-
-```tex
-source ~/esp32/esp-idf/export.sh
-```
-
-### 10、下载课程配套源码
-
-```shell
-cd ~/esp32
-git clone --recursive https://gitee.com/vi-iot/esp32-board.git
-```
-
-### 11、验证esp-idf
-
-```shell
-cd esp32-board/helloworld
-idf.py build
-```
-
-### 12、设置USB串口权限
-
-```shell
-sudo usermod -aG dialout zuozhongkai
-```
-
-### 13、重启Ubuntu
-
-
-
-
-
-
-
-
-
-
 
 # 可能需要
 
