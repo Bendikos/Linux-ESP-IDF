@@ -6,7 +6,7 @@ sudo apt-get install git wget flex bison gperf python3\
  libffi-dev libssl-dev dfu-util libusb-1.0-0
 ```
 
-# 从Gitee克隆esp-idf仓库
+# 从Github克隆esp-idf仓库
 
 ```shell
 mkdir -p ~/esp
